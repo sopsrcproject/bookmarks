@@ -1,0 +1,21 @@
+machine:
+  hosts:
+    localhost: 127.0.0.1
+  python:
+    version: 3.4.3
+  environment:
+    ENV: test
+    DJANGO_SETTINGS_MODULE: bookmarks.settings
+
+dependencies:
+  override:
+    - pip install -r PIP
+
+test:
+  override:
+    - python manage.py makemigrations --merge
+    - python manage.py makemigrations
+    - python manage.py migrate
+
+    - python manage.py test --noinput
+    - python manage.py test --with-coverage --cover-package=account
