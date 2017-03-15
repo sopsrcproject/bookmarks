@@ -10,12 +10,11 @@ machine:
 dependencies:
   override:
     - pip install -r PIP
+    - pyenv local 3.4.3
 
 test:
+  pre:
+    - python manage.py collectstatic --noinput
   override:
-    - python manage.py makemigrations --merge
-    - python manage.py makemigrations
-    - python manage.py migrate
-
-    - python manage.py test --noinput
-    - python manage.py test --with-coverage --cover-package=account
+    - coverage run manage.py test --noinput
+    - coverage report --omit="/home/ubuntu/virtualenvs/*,common/json_serializer.py"
