@@ -13,8 +13,6 @@ dependencies:
     - pyenv local 3.4.3
 
 test:
-  pre:
-    - python manage.py collectstatic --noinput
   override:
     - coverage run manage.py test --noinput
     - coverage report --omit="/home/ubuntu/virtualenvs/*,common/json_serializer.py"
